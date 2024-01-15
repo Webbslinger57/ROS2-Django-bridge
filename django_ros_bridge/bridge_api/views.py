@@ -5,8 +5,12 @@ from rclpy.node import Node
 
 class ROS2Node(Node):
     def __init__(self):
-        super().__init__('ros2_node')
+        super().__init__('django_bridge_node')
 
+"""
+This class is a Django APIView that returns a list of 
+all ROS2 nodes, topics, and services as well as their types.
+"""
 class ROS2APIView(APIView):
     def get(self, request, format=None):
         rclpy.init(args=None)
@@ -19,7 +23,6 @@ class ROS2APIView(APIView):
         # Get a list of all services
         services = node.get_service_names_and_types()
         
-
         node.destroy_node()
         rclpy.shutdown()
 
