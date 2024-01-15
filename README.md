@@ -1,5 +1,16 @@
 # Django-ROS2-Bridge
 
+```bash
+====================================================
+ ____      ____     _      __   __   _____    ____  
+|  _ \     |  |    / \    |  \ |  | /  ___|  / __ \ 
+| | | |    |  |   / - \   |   \|  ||  /     | |  | |
+| | | | _  |  |  /  _  \  |    \  || |   __ | |  | |
+| |_| || |_|  | /  / \  \ |  |\   ||  \_|_ || |__| |
+|____/ |______|/__/   \__\|__| \__| \_____/  \____/
+====================================================
+```
+
 This is a Django-based web interface for a ROS2 system, providing both REST API endpoints and web pages. It allows for a user-friendly way to interact with a ROS2 system, and is written in Python.
 
 ## Development/Contributions
