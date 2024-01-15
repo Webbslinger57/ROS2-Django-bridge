@@ -3,6 +3,10 @@ from rest_framework.response import Response
 import rclpy
 from rclpy.node import Node
 
+"""
+This class is a ROS2 node that is used to get a list of all
+ROS2 nodes, topics, and services as well as their types.
+"""
 class ROS2Node(Node):
     def __init__(self):
         super().__init__('django_bridge_node')
