@@ -4,6 +4,8 @@ This is a Django-based web interface for a ROS2 system, providing both REST API 
 
 ## Django-Overview
 
+Django is a great choice for building a web interface for a ROS2 system because it provides a high-level framework for building web applications quickly and efficiently. It includes many features such as an ORM, templates, and a robust URL routing system, which can help streamline development and make it easier to maintain the codebase. Additionally, Django has a large and active community, which can provide valuable resources and support for developers.
+
 - The django portion of this package will contain two apps:
     1. bridge_api
         - This app will provide various REST API endpoints for interacting with the ROS2 system.
