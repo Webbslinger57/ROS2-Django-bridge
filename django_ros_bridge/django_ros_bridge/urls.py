@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path
-from bridge_api.views import ROS2APIView, ROS2TopicAPIView, ROS2ServiceAPIView
+from bridge_api.views import ROS2APIView #, ROS2TopicAPIView, ROS2ServiceAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
