@@ -1,6 +1,6 @@
 # Django-ROS2-Bridge
 
-This package acts as a web interface for a ROS2 system. It will contain both REST API Endpoints as well as regular webpages.
+This is a Django-based web interface for a ROS2 system, providing both REST API endpoints and web pages. It allows for a user-friendly way to interact with a ROS2 system, and is written in Python.
 
 ## Django-Overview
 
