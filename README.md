@@ -29,7 +29,7 @@ cd django_ros_bridge/
 source setup.sh
 ```
 
-- run the server 
+- run the server
 
 ```bash
 # localhost
