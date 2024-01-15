@@ -2,6 +2,10 @@
 
 This is a Django-based web interface for a ROS2 system, providing both REST API endpoints and web pages. It allows for a user-friendly way to interact with a ROS2 system, and is written in Python.
 
+## Development/Contributions
+
+This project is in the early stages of development. Any Contributions are welcome.
+
 ## Django-Overview
 
 Django is a great choice for building a web interface for a ROS2 system because it provides a high-level framework for building web applications quickly and efficiently. It includes many features such as an ORM, templates, and a robust URL routing system, which can help streamline development and make it easier to maintain the codebase. Additionally, Django has a large and active community, which can provide valuable resources and support for developers.
@@ -27,10 +31,10 @@ The ROS2 system is used to manage the communication between the web interface an
 cd django_ros_bridge/
 ```
 
-- source the setup script
+- source the launch script
 
 ```bash
-source setup.sh
+source launch.sh
 ```
 
 - run the server
