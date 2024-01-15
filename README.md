@@ -44,7 +44,7 @@ python3 manage.py runserver 0.0.0.0
 
 ## Leo, summarize this repo in the style of Dr. Seuss
 
-```
+```text
 In a land of tech and code,
 Where ROS2 and Django roam,
 A web interface is born,
