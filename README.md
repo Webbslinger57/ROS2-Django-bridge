@@ -14,6 +14,8 @@ Django is a great choice for building a web interface for a ROS2 system because 
 
 ## ROS2-Overview
 
+The ROS2 system is used to manage the communication between the web interface and the actual ROS2 system. It provides a set of tools and libraries for building and managing ROS2 systems, and it includes a message passing protocol for communication between nodes.
+
 - This package is built using ROS2 Humble and python.
 
 ## Getting Started
