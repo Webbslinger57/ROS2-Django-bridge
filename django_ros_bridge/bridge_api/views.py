@@ -35,3 +35,20 @@ class ROS2APIView(APIView):
             'topics': topics,
             'services': services,
         })
+
+# class ROS2TopicAPIView(APIView):
+#     def get(self, request, topic_name, format=None):
+#         rclpy.init(args=None)
+#         node = ROS2Node(topic_name)
+
+#         rclpy.spin_once(node)
+
+#         response = {
+#             'topic': topic_name,
+#             'data': node.latest_msg,
+#         }
+
+#         node.destroy_node()
+#         rclpy.shutdown()
+
+#         return Response(response)
