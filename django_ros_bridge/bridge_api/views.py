@@ -78,3 +78,50 @@ class ROS2TopicAPIView(APIView):
             'topic': topic_endpoint,
             'message_type': type,
         }, status=200)
+
+class ROS2ServiceAPIView(APIView):
+    def get(self, request, format=None):
+        service_endpoint = request.GET.get('service_endpoint', None)
+        
+        # Get a list of all services
+        services = node.get_service_names_and_types()
+        
+        # Create a dictionary where the keys are the service names and the values are the types
+        service_dict = {service[0]: service[1] for service in services}
+        
+        if service_endpoint not in service_dict:
+            return Response({
+                'error': 'Service not found.',
+            }, status=400)
+            
+        type = service_dict[service_endpoint]
+        
+        return Response({
+            'service': service_endpoint,
+            'message_type': type,
+        }, status=200)
+        
+    def post(self, request, format=None):
+        service_endpoint = request.GET.get('service_endpoint', None)
+        
+        # Get a list of all services
+        services = node.get_service_names_and_types()
+        
+        # Create a dictionary where the keys are the service names and the values are the types
+        service_dict = {service[0]: service[1] for service in services}
+        
+        if service_endpoint not in service_dict:
+            return Response({
+                'error': 'Service not found.',
+            }, status=400)
+            
+        type = service_dict[service_endpoint]
+        
+        # Add Subscription
+        node.add_subscription(service_endpoint, type)
+        
+        return Response({
+            'service': service_endpoint,
+            'message_type': type,
+        }, status=200)
+        
