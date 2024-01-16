@@ -11,10 +11,12 @@ class ROS2Node(Node):
     def __init__(self):
         super().__init__('django_bridge_node')
         
+    # Deinitialize the ROS2 node.
     def deinit(self):
         self.node.destroy_node()
         rclpy.shutdown()
         
+    # Import a message type from a string
     def get_message_type(message_type_str):
         module_name, message_name = message_type_str.replace('/', '.').rsplit('.', 1)
         module = importlib.import_module(module_name)
