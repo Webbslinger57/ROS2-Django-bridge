@@ -25,7 +25,7 @@ class ROS2Node(Node):
             while rclpy.ok():
                 rclpy.spin_once(self)
                 time.sleep(0.5)
-                # Process messages...
+                # Send from outgoing queue...
         except rclpy.executors.ExternalShutdownException:
             pass
         finally:
