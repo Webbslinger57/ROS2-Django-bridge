@@ -58,6 +58,7 @@ class ROS2Node(Node):
         type = self.get_message_type(msg_type)
         print(type)
        
+    # Convert Header to Dictionary
     def header_to_dict(self, header):
         return {
             'stamp': header.stamp.sec + header.stamp.nanosec / 1e9,
