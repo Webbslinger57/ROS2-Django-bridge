@@ -17,7 +17,7 @@ class ROS2Node(Node):
         rclpy.shutdown()
         
     # Import a message type from a string
-    def get_message_type(message_type_str):
+    def get_message_type(self, message_type_str):
         module_name, message_name = message_type_str.replace('/', '.').rsplit('.', 1)
         module = importlib.import_module(module_name)
         return getattr(module, message_name)
@@ -32,3 +32,7 @@ class ROS2Node(Node):
         type = self.get_message_type(msg_type)
         self.create_subscription(type, topic_endpoint, self.sub_callback, 10)
         print(self.subscriptions)
+        
+    def call_service(self, service_endpoint, msg_type, msg):
+        type = self.get_message_type(msg_type)
+        print(type)

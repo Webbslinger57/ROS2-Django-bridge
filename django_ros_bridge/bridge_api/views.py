@@ -116,10 +116,9 @@ class ROS2ServiceAPIView(APIView):
             }, status=400)
             
         type = service_dict[service_endpoint]
-        
-        # Add Subscription
-        node.add_subscription(service_endpoint, type)
-        
+
+        # Make service call and return response
+        node.call_service(service_endpoint, type, request.data)
         return Response({
             'service': service_endpoint,
             'message_type': type,
