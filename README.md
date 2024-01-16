@@ -72,6 +72,10 @@ python3 manage.py runserver
 python3 manage.py runserver 0.0.0.0
 ```
 
+## Notes
+
+- This package is not Thread Safe.
+
 ## Leo, summarize this repo in the style of Dr. Seuss
 
 ```text

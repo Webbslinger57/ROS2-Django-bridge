@@ -45,17 +45,36 @@ class ROS2TopicAPIView(APIView):
         
         if topic_endpoint not in topic_dict:
             return Response({
-                'status': '400',
                 'error': 'Topic not found.',
-            })
+            }, status=400)
             
         type = topic_dict[topic_endpoint]
         
         return Response({
-            'status': '200',
             'topic': topic_endpoint,
             'message_type': type,
-        })
+        }, status=200)
+        
+    def post(self, request, format=None):
+        topic_endpoint = request.GET.get('topic_endpoint', None)
+        
+        # Get a list of all topics
+        topics = node.get_topic_names_and_types()
+        
+        # Create a dictionary where the keys are the topic names and the values are the types
+        topic_dict = {topic[0]: topic[1] for topic in topics}
+        
+        if topic_endpoint not in topic_dict:
+            return Response({
+                'error': 'Topic not found.',
+            }, status=400)
+            
+        type = topic_dict[topic_endpoint]
         
         # Add Subscription
-        # node.add_subscription(topic_endpoint, 'std_msgs/msg/String')
+        node.add_subscription(topic_endpoint, type)
+        
+        return Response({
+            'topic': topic_endpoint,
+            'message_type': type,
+        }, status=200)
