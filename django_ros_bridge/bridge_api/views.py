@@ -11,7 +11,7 @@ if not rclpy.ok():
 node = ROS2Node()
 
 """
-This class is a Django APIView that returns a list of 
+GET: This class is a Django APIView that returns a list of 
 all ROS2 nodes, topics, and services as well as their types.
 """
 class ROS2APIView(APIView):
@@ -30,7 +30,8 @@ class ROS2APIView(APIView):
         })
 
 """
-This view gets information about a specific ROS2 topic.
+GET: This view gets information about a specific ROS2 topic.
+POST: This view adds a subscription to a specific ROS2 topic.
 """
 class ROS2TopicAPIView(APIView):    
     def get(self, request, format=None):
@@ -78,6 +79,10 @@ class ROS2TopicAPIView(APIView):
             'message_type': type,
         }, status=200)
 
+"""
+GET: This view gets information about a specific ROS2 service.
+POST: This view makes a service call to a specific ROS2 service.
+"""
 class ROS2ServiceAPIView(APIView):
     def get(self, request, format=None):
         service_endpoint = request.GET.get('service_endpoint', None)
@@ -102,7 +107,7 @@ class ROS2ServiceAPIView(APIView):
         
     def post(self, request, format=None):
         service_endpoint = request.GET.get('service_endpoint', None)
-        
+
         # Get a list of all services
         services = node.get_service_names_and_types()
         
@@ -113,7 +118,7 @@ class ROS2ServiceAPIView(APIView):
             return Response({
                 'error': 'Service not found.',
             }, status=400)
-            
+
         type = service_dict[service_endpoint][0]
 
         # Make service call and return response
@@ -122,4 +127,3 @@ class ROS2ServiceAPIView(APIView):
             'service': service_endpoint,
             'message_type': type,
         }, status=200)
-        
