@@ -55,11 +55,20 @@ class ROS2Node(Node):
     def call_service(self, service_endpoint, msg_type, msg):
         type = self.get_message_type(msg_type)
         print(type)
+       
+    # Convert a message to a dictionary
+    def msg_to_dict(self, msg):
+        msg_dict = {}
+        for field_name in msg.get_fields_and_field_types():
+            field_value = getattr(msg, field_name)
+            msg_dict[field_name] = field_value
+        return msg_dict 
         
     # Get the imcoming messages
     def get_incoming_msgs(self):
         msgs = []
         while not self.incoming_msgs.empty():
             msg = self.incoming_msgs.get()
-            msgs.append(msg.data) # Change This To Work With All Message Types
+            msg_dict = self.msg_to_dict(msg)
+            msgs.append(msg_dict)
         return msgs
