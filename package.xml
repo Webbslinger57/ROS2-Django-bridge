@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>django_ros2_bridge</name>
+  <name>django_ros_bridge</name>
   <version>0.0.0</version>
   <description>This package provides a webserver interaction with a ROS2 system.</description>
   <maintainer email="webbslinger57@gmail.com">elijah</maintainer>
