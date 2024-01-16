@@ -50,7 +50,7 @@ The ROS2 system is used to manage the communication between the web interface an
 
 ## Getting Started
 
-- Ensure you have django, django-rest, and ros2-humble dependencies installed. 
+- Ensure you have django, django-rest, and ros2-humble dependencies installed.
 - Navigate to the django_ros_bridge directory
 
 ```bash

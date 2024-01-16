@@ -72,6 +72,7 @@ class ROS2TopicAPIView(APIView):
         type = topic_dict[topic_endpoint][0]
         
         # Add Subscription
+        print("Adding subscription to topic: " + topic_endpoint)
         node.add_subscription(topic_endpoint, type)
         
         return Response({
@@ -126,4 +127,14 @@ class ROS2ServiceAPIView(APIView):
         return Response({
             'service': service_endpoint,
             'message_type': type,
+        }, status=200)
+
+"""
+GET: This view gets the incoming messages from all subscriptions.
+"""
+class ROS2IncomingMsgAPIView(APIView):
+    def get(self, request, format=None):
+        incoming_msgs = node.get_incoming_msgs()
+        return Response({
+            'incoming_msgs': incoming_msgs,
         }, status=200)
