@@ -1,6 +1,5 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-
 import rclpy
 from bridge_api.node import ROS2Node
 
@@ -69,7 +68,7 @@ class ROS2TopicAPIView(APIView):
                 'error': 'Topic not found.',
             }, status=400)
             
-        type = topic_dict[topic_endpoint]
+        type = topic_dict[topic_endpoint][0]
         
         # Add Subscription
         node.add_subscription(topic_endpoint, type)
@@ -115,7 +114,7 @@ class ROS2ServiceAPIView(APIView):
                 'error': 'Service not found.',
             }, status=400)
             
-        type = service_dict[service_endpoint]
+        type = service_dict[service_endpoint][0]
 
         # Make service call and return response
         node.call_service(service_endpoint, type, request.data)
