@@ -1,5 +1,7 @@
 # ROS2-Django-Bridge
 
+-**Until this line is removed, the first version is incomplete**
+
 ```bash
  /======================================================\ 
 ||           ____     ____     _____   ______           || 
