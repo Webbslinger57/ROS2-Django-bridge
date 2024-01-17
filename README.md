@@ -61,6 +61,7 @@ source launch.sh
 
 ## Notes
 
+- You may need to modify paths in the launch.sh script to work for you environment.
 - This package is not Thread Safe.
 
 ## Leo, summarize this repo in the style of Dr. Seuss
