@@ -14,7 +14,7 @@ setup(
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='elijah',
-    maintainer_email='webbslinger57@gmail.com',
+    maintainer_email='dev@webbslinger.com',
     description='This package contains a Django app that provides a web interface for ROS2.',
     license='MIT',
     tests_require=['pytest'],

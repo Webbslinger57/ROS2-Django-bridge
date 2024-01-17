@@ -30,7 +30,7 @@ This is a Django-based web interface for a ROS2 system, providing both REST API 
 
 ## Development/Contributions
 
-This project is in the early stages of development. Any Contributions are welcome.
+This project is in the early stage of development. Contributions are welcome and encouraged.
 
 ## Django-Overview
 
