@@ -7,7 +7,6 @@ from std_msgs.msg import Header
 from sensor_msgs.msg import Image
 import importlib
 import numpy as np
-import cv2
 import base64
 
 """
@@ -19,6 +18,7 @@ class ROS2Node(Node):
     def __init__(self):
         super().__init__('django_bridge_node')
         self.incoming_msgs = queue.Queue(maxsize=20)
+        self.images = queue.Queue(maxsize=10)
         self.spin_node_thread = threading.Thread(target=self.spin_node)
         self.spin_node_thread.start()
         
@@ -70,17 +70,17 @@ class ROS2Node(Node):
         }
        
     # Convert an image to a base64 string
-    def image_to_base64(self, image):
-        # Convert the image to a numpy array
-        np_img = np.array(image.data).reshape(image.height, image.width, -1)
+    def image_to_base64(self, image: Image):
+        # Convert the image data to a numpy array
+        image_data = np.array(image, dtype=np.uint8)
 
-        # Convert the numpy array to a JPEG image
-        _, jpeg_img = cv2.imencode('.jpg', np_img)
+        # Convert the numpy array to bytes
+        image_bytes = image_data.tobytes()
 
-        # Convert the JPEG image to a base64 string
-        base64_img = base64.b64encode(jpeg_img).decode('utf-8')
+        # Encode the bytes to a base64 string
+        base64_str = base64.b64encode(image_bytes).decode('utf-8')
 
-        return base64_img
+        return base64_str
        
     # Convert a message to a dictionary
     def msg_to_dict(self, msg):
@@ -88,8 +88,12 @@ class ROS2Node(Node):
         for field_name in msg.get_fields_and_field_types():
             field_value = getattr(msg, field_name)
             if field_name == 'data' and isinstance(msg, Image):
-                field_value = self.image_to_base64(field_value)
-            elif isinstance(field_value, Header):
+                if self.images.full():
+                    self.images.get()
+                img = {"frame": str(msg.header.frame_id), "data": self.image_to_base64(field_value)}
+                self.images.put(img)
+                field_value = "In Image Queue"
+            if isinstance(field_value, Header):
                 field_value = self.header_to_dict(field_value)
             msg_dict[field_name] = field_value
         return msg_dict
