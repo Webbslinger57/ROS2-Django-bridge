@@ -36,8 +36,9 @@ class ROS2Node(Node):
         
     # Deinitialize the ROS2 node.
     def deinit(self):
-        self.node.destroy_node()
-        rclpy.shutdown()
+        self.destroy_node()
+        if rclpy.ok():
+            rclpy.shutdown()
         
     # Import a message type from a string
     def get_message_type(self, message_type_str):
