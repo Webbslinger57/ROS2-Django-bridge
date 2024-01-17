@@ -3,18 +3,14 @@ from rest_framework.response import Response
 import rclpy
 from bridge_api.node import ROS2Node
 
-"""
-Initialize the ROS2 node.
-"""
-if not rclpy.ok():
-    rclpy.init(args=None)
+# Initialize the ROS2 node.
 node = ROS2Node()
 
-"""
-GET: This class is a Django APIView that returns a list of 
-all ROS2 nodes, topics, and services as well as their types.
-"""
 class ROS2APIView(APIView):
+    """
+    GET: This class is a Django APIView that returns a list of 
+    all ROS2 nodes, topics, and services as well as their types.
+    """
     def get(self, request, format=None):
         # Get a list of all nodes
         nodes = node.get_node_names()
@@ -29,11 +25,11 @@ class ROS2APIView(APIView):
             'services': services,
         })
 
-"""
-GET: This view gets information about a specific ROS2 topic.
-POST: This view adds a subscription to a specific ROS2 topic.
-"""
-class ROS2TopicAPIView(APIView):    
+class ROS2TopicAPIView(APIView): 
+    """
+    GET: This view gets information about a specific ROS2 topic.
+    POST: This view adds a subscription to a specific ROS2 topic.
+    """   
     def get(self, request, format=None):
         topic_endpoint = request.GET.get('topic_endpoint', None)
         
@@ -80,11 +76,11 @@ class ROS2TopicAPIView(APIView):
             'message_type': type,
         }, status=200)
 
-"""
-GET: This view gets information about a specific ROS2 service.
-POST: This view makes a service call to a specific ROS2 service.
-"""
 class ROS2ServiceAPIView(APIView):
+    """
+    GET: This view gets information about a specific ROS2 service.
+    POST: This view makes a service call to a specific ROS2 service.
+    """
     def get(self, request, format=None):
         service_endpoint = request.GET.get('service_endpoint', None)
         
@@ -129,10 +125,10 @@ class ROS2ServiceAPIView(APIView):
             'message_type': type,
         }, status=200)
 
-"""
-GET: This view gets the incoming messages from all subscriptions.
-"""
 class ROS2IncomingMsgAPIView(APIView):
+    """
+    GET: This view gets the incoming messages from all subscriptions.
+    """
     def get(self, request, format=None):
         incoming_msgs = node.get_incoming_msgs()
         return Response({

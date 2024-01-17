@@ -18,6 +18,8 @@ messages to the Django server.
 class ROS2Node(Node):
     def __init__(self):
         """Initialize the ROS2 node."""
+        if not rclpy.ok():
+            rclpy.init(args=None)
         super().__init__('django_bridge_node')
         self.incoming_msgs = queue.Queue(maxsize=20)
         self.images = queue.Queue(maxsize=10)
