@@ -1,9 +1,11 @@
 echo "Launchinc django_ros_bridge..."
 echo "Sourcing ROS2..."
-source /opt/ros/humble/setup.bash
+source /opt/ros/humble/setup.bash # Source ROS2
 echo "Sourcing ros2 workspace..."
 echo "Loading..."
-source $HOME/ros2_ws/install/setup.bash
+source $HOME/ros2_ws/install/setup.bash # Source your ros2 workspace
+
+# Ignore this part
 SECONDS=0
 while [ $SECONDS -lt 2 ]; do
     for i in / - \\ \|; do
@@ -37,7 +39,6 @@ echo "|| |____/ |______|/__/   \__\|__| \__| \_____/  \____/  ||"
 echo " \======================================================/ "
 echo "Starting django_ros_bridge..."
 echo "Loading..."
-source $HOME/ros2_ws/install/setup.bash
 SECONDS=0
 while [ $SECONDS -lt 2 ]; do
     for i in / - \\ \|; do
@@ -46,4 +47,7 @@ while [ $SECONDS -lt 2 ]; do
     done
 done
 echo ""
-python3 django_ros_bridge/manage.py runserver 0.0.0.0:8000
+# Until here..."It's for fun" - Nacho
+
+# Remove '0.0.0.0:8000' if you want to run it on localhost
+python3 django_ros_bridge/manage.py runserver 0.0.0.0:8000 # Run django server
