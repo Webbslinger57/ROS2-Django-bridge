@@ -6,6 +6,9 @@ from rclpy.node import Node
 from std_msgs.msg import Header
 from sensor_msgs.msg import Image
 import importlib
+import numpy as np
+import cv2
+import base64
 
 """
 This class is a ROS2 node that is used to get a list of all
@@ -65,15 +68,27 @@ class ROS2Node(Node):
             'frame_id': header.frame_id
         }
        
+    # Convert an image to a base64 string
+    def image_to_base64(self, image):
+        # Convert the image to a numpy array
+        np_img = np.array(image.data).reshape(image.height, image.width, -1)
+
+        # Convert the numpy array to a JPEG image
+        _, jpeg_img = cv2.imencode('.jpg', np_img)
+
+        # Convert the JPEG image to a base64 string
+        base64_img = base64.b64encode(jpeg_img).decode('utf-8')
+
+        return base64_img
+       
     # Convert a message to a dictionary
     def msg_to_dict(self, msg):
         msg_dict = {}
         for field_name in msg.get_fields_and_field_types():
+            field_value = getattr(msg, field_name)
             if field_name == 'data' and isinstance(msg, Image):
-                field_value = 'JPEG Image'
-            else:
-                field_value = getattr(msg, field_name)
-            if isinstance(field_value, Header):
+                field_value = self.image_to_base64(field_value)
+            elif isinstance(field_value, Header):
                 field_value = self.header_to_dict(field_value)
             msg_dict[field_name] = field_value
         return msg_dict
